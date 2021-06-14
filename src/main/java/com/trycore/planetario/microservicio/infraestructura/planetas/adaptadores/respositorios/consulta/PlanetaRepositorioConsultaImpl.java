@@ -1,6 +1,7 @@
 package com.trycore.planetario.microservicio.infraestructura.planetas.adaptadores.respositorios.consulta;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.trycore.planetario.comun.infraestructura.excepciones.ExcepcionSinDatos;
 import com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos.CantidadPersonasPorPlanetaDTO;
 import com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos.PlanetaDTO;
+import com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos.TopPlanetasDTO;
 import com.trycore.planetario.microservicio.dominio.planetas.puertos.repositorios.consulta.PlanetaRepositorioConsulta;
 import com.trycore.planetario.microservicio.infraestructura.planetas.adaptadores.respositorios.PlanetaRepositorioJPA;
 import com.trycore.planetario.microservicio.infraestructura.planetas.adaptadores.respositorios.fabrica.PlanetaFabricaInfraestructura;
@@ -49,6 +51,19 @@ public class PlanetaRepositorioConsultaImpl implements PlanetaRepositorioConsult
 		}
 
 		return fabrica.mapearPlanetaEntidadAPlanetaDTO(planetaEntidad);
+	}
+
+	@Override
+	public List<TopPlanetasDTO> listarTop() {
+		List<PlanetaEntidad> topPlanetas = planetaRepositorio.findTop3ByOrderByCantidadVisitasDesc();
+
+		if (topPlanetas.isEmpty()) {
+			throw new ExcepcionSinDatos(NO_HAY_PLANETAS);
+		}
+
+		return topPlanetas.stream()
+				.map(planeta -> new TopPlanetasDTO(planeta.getNombre(), planeta.getCantidadVisitas()))
+				.collect(Collectors.toList());
 	}
 
 }

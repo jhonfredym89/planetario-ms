@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos.CantidadPersonasPorPlanetaDTO;
 import com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos.PlanetaDTO;
+import com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos.TopPlanetasDTO;
 
 public interface PlanetaRepositorioConsulta {
 	/**
@@ -20,4 +21,11 @@ public interface PlanetaRepositorioConsulta {
 	 * @return PlanetaDTO
 	 */
 	PlanetaDTO consultarPorNombre(String nombre);
+
+	/**
+	 * Permite consultar el top tres de los Planetas más visitados.
+	 * 
+	 * @return Listado con nombre del planeta y cantidad de visitas.
+	 */
+	List<TopPlanetasDTO> listarTop();
 }
