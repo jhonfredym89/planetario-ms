@@ -1,5 +1,7 @@
 package com.trycore.planetario.microservicio.dominio.planetas.modelo.dtos;
 
+import java.util.List;
+
 public class PlanetaDTO {
 	private String nombre;
 	private float periodoRotacion;
@@ -7,9 +9,10 @@ public class PlanetaDTO {
 	private String terreno;
 	private String clima;
 	private Integer cantidadVisitas;
+	private List<String> personas;
 
 	public PlanetaDTO(String nombre, float periodoRotacion, int diametro, String terreno, String clima,
-			Integer cantidadVisitas) {
+			Integer cantidadVisitas, List<String> personas) {
 
 		this.nombre = nombre;
 		this.periodoRotacion = periodoRotacion;
@@ -17,6 +20,7 @@ public class PlanetaDTO {
 		this.terreno = terreno;
 		this.clima = clima;
 		this.cantidadVisitas = cantidadVisitas;
+		this.personas = personas;
 	}
 
 	public String getNombre() {
@@ -41,5 +45,9 @@ public class PlanetaDTO {
 
 	public Integer getCantidadVisitas() {
 		return cantidadVisitas;
+	}
+
+	public List<String> getPersonas() {
+		return personas;
 	}
 }

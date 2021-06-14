@@ -1,13 +1,18 @@
 package com.trycore.planetario.microservicio.infraestructura.planetas.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.trycore.planetario.microservicio.infraestructura.personas.entidades.PersonaEntidad;
 
 @Entity
 @Table(name = "planetas")
@@ -36,9 +41,8 @@ public class PlanetaEntidad implements Serializable {
 	@Column(name = "cantidad_visitas")
 	private Integer cantidadVisitas;
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	@OneToMany(mappedBy = "planeta", fetch = FetchType.LAZY)
+	private List<PersonaEntidad> personas;
 
 	public Integer getId() {
 		return id;
@@ -66,5 +70,9 @@ public class PlanetaEntidad implements Serializable {
 
 	public Integer getCantidadVisitas() {
 		return cantidadVisitas;
+	}
+
+	public List<PersonaEntidad> getPersonas() {
+		return personas;
 	}
 }

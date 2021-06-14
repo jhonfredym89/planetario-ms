@@ -64,7 +64,8 @@ public class PlanetaRespositorioConsultaImplTest {
 	@Test
 	public void retornarPlanetaDTO() {
 		PlanetaEntidad planetaEntidad = new PlanetaEntidad();
-		PlanetaDTO personaDTO = new PlanetaDTO("Tierra", 1.3F, 123, null, null, null);
+		List<String> personas = Arrays.asList("Jhon", "Paola");
+		PlanetaDTO personaDTO = new PlanetaDTO("Tierra", 1.3F, 123, null, null, null, personas);
 		PlanetaRepositorioJPA repositorioJPA = mock(PlanetaRepositorioJPA.class);
 		PlanetaFabricaInfraestructura fabrica = mock(PlanetaFabricaInfraestructura.class);
 		PlanetaRepositorioConsultaImpl personaRepositorio = new PlanetaRepositorioConsultaImpl(repositorioJPA, fabrica);
@@ -75,6 +76,7 @@ public class PlanetaRespositorioConsultaImplTest {
 
 		assertEquals("Tierra", planetaRespuesta.getNombre());
 		assertNull(planetaRespuesta.getClima());
+		assertEquals(2, personaDTO.getPersonas().size());
 
 	}
 }
