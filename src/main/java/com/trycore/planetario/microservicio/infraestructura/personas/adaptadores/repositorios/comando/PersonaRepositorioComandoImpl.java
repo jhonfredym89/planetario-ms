@@ -2,7 +2,7 @@ package com.trycore.planetario.microservicio.infraestructura.personas.adaptadore
 
 import org.springframework.stereotype.Repository;
 
-import com.trycore.planetario.microservicio.dominio.personas.repositorios.comando.PersonaRepositorioComando;
+import com.trycore.planetario.microservicio.dominio.personas.puertos.repositorios.comando.PersonaRepositorioComando;
 
 @Repository
 public class PersonaRepositorioComandoImpl implements PersonaRepositorioComando {
